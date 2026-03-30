@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Selecione o perfil para assistir na Netflix">
+    <title>Netflix - Selecione seu Perfil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Quem está assistindo?</h1>
+            <div class="theme-switch" aria-label="Alternar entre modo escuro e claro">
+                <input type="checkbox" id="theme-toggle" class="theme-toggle-checkbox" aria-hidden="true" />
+                <label for="theme-toggle" class="theme-toggle-slider" aria-hidden="true">
+                    <span class="toggle-knob"></span>
+                </label>
+                <span class="theme-label" aria-live="polite">Modo escuro</span>
+            </div>
+        </header>   
+        <section class="profiles" role="region" aria-label="Seleção de perfis">
+            <ul class="profiles-list">
+                <li class="profile">
+                    <a href="#" aria-label="Acessar perfil do Antonio">
+                        <figure>
+                            <img src="/assets/profile-1.jpg" alt="Uma figura de animação stop-motion gótica em um quarto extravagante.">
+                            <figcaption>Antonio</figcaption>
+                        </figure>
+                    </a>
+                </li>
+                <li class="profile">
+                    <a href="" aria-label="Acessar perfil da Melissa">
+                        <figure>
+                            <img src="/assets/profile-2.jpg" alt="Uma figura de animação stop-motion gótica em um quarto extravagante.">
+                            <figcaption>Melissa</figcaption>
+                        </figure>
+                    </a>
+                </li>
+                <li class="profile">
+                    <a href="#" aria-label="Acessar perfil do Arthur">
+                        <figure>
+                            <img src="/assets/profile-3.jpg" alt="Uma figura de animação stop-motion gótica em um quarto extravagante.">
+                            <figcaption>Arthur</figcaption>
+                        </figure>
+                    </a>
+                </li>
+                <li class="profile">
+                    <a href="./catalogo/catalogo.html" aria-label="Acessar perfil da Izadora">
+                        <figure>
+                            <img src="/assets/profile-4.jpg" alt="Uma figura de animação stop-motion gótica em um quarto extravagante.">
+                            <figcaption>Izadora</figcaption>
+                        </figure>
+                    </a>
+                </li>
+                <li class="profile">
+                    <a href="#" aria-label="Acessar perfil da Sofia">
+                        <figure>
+                            <img src="/assets/profile-5.jpg" alt="Uma figura de animação stop-motion gótica em um quarto extravagante.">
+                            <figcaption>Sofia</figcaption>
+                        </figure>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <script src="js/index.js"></script>
+</body>
+</html>

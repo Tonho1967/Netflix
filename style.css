@@ -1,0 +1,575 @@
+/* Reset e Variáveis */
+* {
+    margin: 0; /* Remove margens padrão de todos os elementos */
+    padding: 0; /* Remove preenchimento padrão de todos os elementos */
+    box-sizing: border-box; /* Inclui padding e borda no cálculo das dimensões */
+}
+
+:root {
+    --netflix-red: #E50914; /* Cor de destaque Netflix */
+    --netflix-black: #141414; /* Cor de fundo principal */
+    --netflix-dark: #221f1f; /* Tom escuro extra para gradiente */
+    --text-primary: #ffffff; /* Cor do texto principal */
+    --text-secondary: #808080; /* Cor de texto secundária */
+    --transition: 0.3s ease; /* Duração/padrão das transições */
+}
+
+/* Estilo Global */
+html {
+    scroll-behavior: smooth; /* Rolagem suave em links internos */
+}
+
+body {
+    background-color: var(--netflix-black); /* Cor de fundo do corpo */
+    color: var(--text-primary); /* Cor padrão do texto */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Família tipográfica */
+    font-size: 16px; /* Tamanho base do texto */
+    line-height: 1.6; /* Altura da linha para legibilidade */
+    transition: background-color var(--transition), color var(--transition); /* Transição do tema */
+}
+
+/* Tema claro */
+body.light-mode {
+    --netflix-black: #ffffff;
+    --netflix-dark: #f2f2f2;
+    --text-primary: #141414;
+    --text-secondary: #555555;
+    background-color: #ffffff;
+    color: #141414;
+}
+
+body.light-mode main {
+    background: linear-gradient(135deg, #ffffff 0%, #f2f2f2 100%);
+}
+
+body.light-mode .profile:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.theme-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.theme-toggle-checkbox {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.theme-toggle-slider {
+    position: relative;
+    width: 56px;
+    height: 30px;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background-color var(--transition), border var(--transition);
+}
+
+.theme-toggle-slider .toggle-knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: left var(--transition);
+}
+
+.theme-toggle-checkbox:checked + .theme-toggle-slider {
+    background-color: #e50914;
+    border-color: #e50914;
+}
+
+.theme-toggle-checkbox:checked + .theme-toggle-slider .toggle-knob {
+    left: calc(100% - 28px);
+}
+
+.theme-toggle-checkbox:focus-visible + .theme-toggle-slider {
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.35);
+}
+
+.theme-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+body.light-mode .theme-label {
+    color: #141414;
+}
+
+body.dark-mode .theme-label {
+    color: #ffffff;
+}
+
+/* Tema escuro */
+body.dark-mode {
+    --netflix-black: #141414;
+    --netflix-dark: #221f1f;
+    --text-primary: #ffffff;
+    --text-secondary: #808080;
+    background-color: #141414;
+    color: #ffffff;
+}
+
+body.dark-mode main {
+    background: linear-gradient(135deg, #141414 0%, #221f1f 100%);
+}
+
+/* Main */
+main {
+    min-height: 100vh; /* Ocupa altura total da viewport */
+    display: flex; /* Usando Flexbox para alinhar conteúdo */
+    flex-direction: column; /* Itens em coluna */
+    align-items: center; /* Centraliza horizontalmente */
+    justify-content: center; /* Centraliza verticalmente */
+    padding: 40px 20px; /* Espaçamento interno */
+    background: linear-gradient(135deg, var(--netflix-black) 0%, var(--netflix-dark) 100%); /* Fundo gradiente */
+}
+
+/* Header */
+header {
+    text-align: center; /* Centraliza texto do header */
+    margin-bottom: 60px; /* Espaço abaixo do header */
+    animation: slideDown 0.6s ease; /* Animação de entrada */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+@media (min-width: 768px) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 900px;
+        gap: 0;
+    }
+    header h1 {
+        text-align: left;
+    }
+}
+
+header h1 {
+    font-size: 3rem; /* Tamanho grande para título */
+    font-weight: 700; /* Peso negrito */
+    letter-spacing: 2px; /* Espaçamento entre letras */
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Sombra no texto */
+    margin-bottom: 10px; /* Espaço abaixo do título */
+}
+
+.theme-toggle {
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 8px 14px;
+    border-radius: 28px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color var(--transition), color var(--transition), border var(--transition);
+}
+
+.theme-toggle:hover, .theme-toggle:focus-visible {
+    background-color: rgba(229, 9, 20, 0.85);
+    border-color: rgba(229, 9, 20, 0.95);
+    outline: none;
+}
+
+/* Seção de Perfis */
+[role="region"] {
+    display: grid; /* Grade para perfis */
+    grid-template-columns: repeat(5, 1fr); /* 5 colunas fixas na horizontal */
+    gap: 30px; /* Espaçamento entre itens */
+    width: 90%; /* Deixa espaço nas laterais */
+    width: fit-content; /* Límite máximo para centralizar */
+    animation: fadeIn 0.8s ease; /* Animação de fade in */
+    padding: 0; /* Sem padding extra */
+    margin: 0 auto; /* Centraliza horizontalmente */
+}
+section.profiles {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Lista não ordenada de perfis */
+.profiles-list {
+    list-style: none; /* Remove bullets da lista */
+    display: grid; /* Grade para perfis */
+    grid-template-columns: repeat(5, 1fr); /* 5 colunas fixas na horizontal */
+    gap: 30px; /* Espaçamento entre itens */
+    width: 90%; /* Deixa espaço nas laterais */
+    width: fit-content; /* Límite máximo para centralizar */
+    animation: fadeIn 0.8s ease; /* Animação de fade in */
+    padding: 0; /* Sem padding extra */
+    margin: 0 auto; /* Centraliza horizontalmente */
+}
+
+
+/* Article (Perfil) */
+.profile {
+    display: flex; /* Flexbox para conteúdo do perfil */
+    flex-direction: column; /* Layout em coluna */
+    align-items: center; /* Centraliza horizontalmente */
+    gap: 15px; /* Espaço entre imagem e texto */
+    cursor: pointer; /* Cursor de click */
+    transition: transform var(--transition), filter var(--transition); /* Transição suave */
+}
+
+.profile:hover {
+        transform: scale(1.05); /* Efeito de zoom moderado no hover */
+    box-shadow: 0 8px 30px #ffffff; /* Sombra branca no hover */
+}
+
+.profile:active {
+    transform: scale(0.98); /* Pressivelmente pequeno */
+}
+
+/* Figure e Imagem */
+figure {
+    margin: 0; /* Remove margem default */
+    position: relative; /* Para posicionamento interno */
+    width: 100%; /* Largura total do container */
+    border-radius: 12px; /* Cantos arredondados */
+    overflow: visible; /* Permite que a legenda seja exibida */
+    box-shadow: 0 8px 30px rgba(229, 9, 20, 0.3); /* Sombra vermelha translúcida */
+}
+
+figure img {
+    width: 100%; /* Largura da imagem preenchendo o container */
+    height: 140px; /* Altura aumentada para melhor visualização */
+    object-fit: cover; /* Cobre o container mantendo proporção */
+    transition: transform 0.4s ease; /* Transição suave do zoom */
+    display: block; /* Remove espaçamento inline */
+}
+
+figcaption {
+    position: relative; /* Mantém a legenda abaixo da imagem */
+    margin-top: 8px; /* Espaçamento entre imagem e texto */
+}
+
+.profile:hover figure img {
+    transform: scale(1.05); /* Leve zoom da imagem no hover */
+}
+
+/* Figcaption */
+figcaption {
+    font-size: 1.3rem; /* Tamanho do texto do perfil */
+    font-weight: 600; /* Texto seminegrito */
+    text-align: center; /* Centraliza legenda */
+    color: var(--text-primary); /* Cor do texto */
+    transition: color var(--transition); /* Transição de cor */
+}
+
+.profile:hover figcaption {
+    color: var(--netflix-red); /* Cor de destaque no hover */
+    text-shadow: 0 0 10px rgba(229, 9, 20, 0.6); /* Sombra vermelha na legenda */
+}
+
+/* Animações */
+@keyframes slideDown {
+    from {
+        opacity: 0; /* Começa invisível */
+        transform: translateY(-50px); /* Vem de cima */
+    }
+    to {
+        opacity: 1; /* Termina visível */
+        transform: translateY(0); /* Posição final */
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Inicia invisível */
+    }
+    to {
+        opacity: 1; /* Termina opaco */
+    }
+}
+
+/* Responsividade */
+
+/* Desktop Grande (1200px+) */
+@media (min-width: 1200px) {
+    main {
+        padding: 60px 40px; /* Mais espaçamento em desktops grandes */
+    }
+
+    header h1 {
+        font-size: 3.5rem; /* Título maior em desktop */
+        letter-spacing: 2.5px; /* Mais espaçamento entre letras */
+        margin-bottom: 15px; /* Mais espaço abaixo */
+    }
+
+    [role="region"] {
+        gap: 35px; /* Espaçamento entre perfis */
+    }
+
+    .profiles-list {
+        grid-template-columns: repeat(5, 1fr); /* Mantém 5 colunas */
+        gap: 35px; /* Espaçamento entre perfis */
+    }
+
+    figure {
+        height: auto; /* Altura adaptativa para caber texto */
+        border-radius: 16px; /* Cantos mais arredondados */
+    }
+
+    figure img {
+        height: 200px; /* Altura da imagem aumentada */
+    }
+
+    figcaption {
+        font-size: 1.5rem; /* Legenda maior */
+        margin-top: 5px; /* Espaço acima da legenda */
+    }
+
+    .profile:hover {
+        transform: scale(1.08); /* Zoom maior no hover */
+    }
+}
+
+/* Tablet Grande (1024px - 1199px) */
+@media (min-width: 1024px) and (max-width: 1199px) {
+    main {
+        padding: 50px 30px; /* Espaçamento moderado */
+    }
+
+    header h1 {
+        font-size: 3rem; /* Título padrão */
+        margin-bottom: 12px;
+    }
+
+    [role="region"] {
+        gap: 32px; /* Espaçamento entre perfis */
+    }
+
+    .profiles-list {
+        grid-template-columns: repeat(5, 1fr); /* Mantém 5 colunas */
+        gap: 32px;
+    }
+
+    figure {
+        height: auto; /* Altura adaptativa para caber texto */
+        border-radius: 14px;
+    }
+
+    figure img {
+        height: 180px;
+    }
+
+    figcaption {
+        font-size: 1.4rem;
+    }
+
+    .profile:hover {
+        transform: scale(1.07); /* Zoom moderado */
+    }
+}
+
+/* Tablet (769px - 1023px) */
+@media (min-width: 769px) and (max-width: 1023px) {
+    main {
+        padding: 40px 20px; /* Espaçamento reduzido */
+    }
+
+    header {
+        margin-bottom: 40px; /* Menos margem */
+    }
+
+    header h1 {
+        font-size: 2.5rem; /* Título adaptado */
+        letter-spacing: 1.5px;
+        margin-bottom: 10px;
+    }
+
+    [role="region"] {
+        gap: 22px; /* Espaçamento reduzido */
+    }
+
+    .profiles-list {
+        grid-template-columns: repeat(5, 1fr); /* Mantém 5 colunas */
+        gap: 22px;
+    }
+
+    figure {
+        height: auto; /* Altura adaptativa para caber texto */
+        border-radius: 12px;
+    }
+
+    figure img {
+        height: 150px;
+    }
+
+    figcaption {
+        font-size: 1.1rem;
+    }
+
+    .profile:hover {
+        transform: scale(1.06);
+    }
+}
+
+/* Dispositivo pequeno (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    main {
+        padding: 30px 10px; /* Padding compacto */
+    }
+
+    header {
+        margin-bottom: 30px;
+    }
+
+    header h1 {
+        font-size: 1.8rem; /* Ajuste para telas médias */
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+    }
+
+    [role="region"] {
+        gap: 18px; /* Gap reduzido mas adequado */
+    }
+
+    .profiles-list {
+        grid-template-columns: repeat(5, 1fr); /* 5 colunas na horizontal */
+        gap: 18px;
+    }
+
+    figure {
+        height: auto; /* Altura adaptativa para caber texto */
+        border-radius: 10px;
+    }
+
+    figure img {
+        height: 125px;
+    }
+
+    figcaption {
+        font-size: 0.95rem; /* Texto menor */
+        margin-top: 2px;
+    }
+
+    .profile:hover {
+        transform: scale(1.05); /* Zoom reduzido */
+    }
+}
+
+/* Mobile Médio (361px - 480px) */
+@media (min-width: 361px) and (max-width: 480px) {
+    main {
+        padding: 20px 8px; /* Padding muito reduzido */
+    }
+
+    header {
+        margin-bottom: 25px;
+    }
+
+    header h1 {
+        font-size: 1.4rem; /* Cabeçalho pequeno */
+        letter-spacing: 0.3px;
+        margin-bottom: 5px;
+    }
+
+    [role="region"] {
+        gap: 13px; /* Gap adequado */
+    }
+
+    .profiles-list {
+        grid-template-columns: repeat(5, 1fr); /* 5 colunas na horizontal */
+        gap: 13px;
+        padding: 5px; /* Pequeno padding */
+    }
+
+    figure {
+        height: auto; /* Altura adaptativa para caber texto */
+        border-radius: 8px;
+    }
+
+    figure img {
+        height: 100px;
+    }
+
+    figcaption {
+        font-size: 0.8rem; /* Legenda bem pequena */
+        margin-top: 2px;
+    }
+
+    .profile:hover {
+        transform: scale(1.04); /* Zoom bem pequeno */
+    }
+
+    .profile:active {
+        transform: scale(0.96);
+    }
+}
+
+/* Mobile Pequeno (até 360px) */
+@media (max-width: 360px) {
+    main {
+        padding: 15px 5px; /* Padding bem mínimo */
+        min-height: auto; /* Sem altura mínima */
+    }
+
+    header {
+        margin-bottom: 20px;
+    }
+
+    header h1 {
+        font-size: 1.1rem; /* Título bem pequeno */
+        letter-spacing: 0px; /* Sem espaçamento */
+        margin-bottom: 4px;
+    }
+
+    [role="region"] {
+        gap: 10px; /* Gap mínimo */
+    }
+
+    .profiles-list {
+        grid-template-columns: repeat(5, 1fr); /* 5 colunas compactas */
+        gap: 10px;
+        padding: 3px; /* Padding mínimo */
+    }
+
+    figure {
+        height: auto; /* Altura adaptativa para caber texto */
+        border-radius: 6px;
+    }
+
+    figure img {
+        height: 85px;
+    }
+
+    figcaption {
+        font-size: 0.7rem; /* Legenda minúscula */
+        margin-top: 1px;
+    }
+
+    .profile:hover {
+        transform: scale(1.02); /* Aumento bem mínimo */
+        filter: brightness(1.1); /* Brilho reduzido */
+    }
+}
+
+/* Acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important; /* Remove animações quando preferido */
+        animation-iteration-count: 1 !important; /* Evita loop infinito */
+        transition-duration: 0.01ms !important; /* Transições praticamente instantâneas */
+    }
+}
+
+/* Focus para navegação por teclado */
+.profile:focus-within {
+    outline: 3px solid var(--netflix-red); /* Destaque de foco no perfil */
+    outline-offset: 8px; /* Espaço entre outline e elemento */
+    border-radius: 8px; /* Preserva cantos arredondados */
+}
