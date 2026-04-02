@@ -251,6 +251,12 @@ figure img {
     display: block; /* Remove espaçamento inline */
 }
 
+figure img:hover,
+figure img:active,
+figure img.zoomed {
+    transform: scale(1.8) !important; /* Aumenta 80% no hover/active/click */
+}
+
 figcaption {
     position: relative; /* Mantém a legenda abaixo da imagem */
     margin-top: 8px; /* Espaçamento entre imagem e texto */

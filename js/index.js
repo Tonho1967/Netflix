@@ -42,4 +42,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    const profileImages = document.querySelectorAll('.profiles img');
+    profileImages.forEach(img => {
+        img.addEventListener('click', (e) => {
+            // permite o link seguir o destino (não interrompe navegação), mas aplica zoom rápido
+            img.classList.add('zoomed');
+            setTimeout(() => {
+                img.classList.remove('zoomed');
+            }, 500);
+        });
+
+        img.addEventListener('mouseenter', () => {
+            img.classList.add('zoomed');
+        });
+
+        img.addEventListener('mouseleave', () => {
+            img.classList.remove('zoomed');
+        });
+    });
 });
